@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Название " />
+                        <p:inputText value="#{saleController.name}"/>
+                        
+                        <h:outputText value="Кол-во " />
+                        <p:inputText value="#{saleController.quantity}"/>
+                        
+                        <h:outputText value="Сумма " />
+                        <p:inputText value="#{saleController.theAmount}"/>
+                        
+                        <h:outputText value="Оценщик " />
+                        <p:inputText value="#{saleController.appraiser}"/>
+                        
+                        <h:outputText value="Оценка " />
+                        <p:inputText value="#{saleController.estimation}"/>
+                        
+                        <h:outputText value="Клиент " />
+                        <p:inputText value="#{saleController.client}"/>
+
+                        <p:commandButton value="Добавить" icon="fa fa-fw fa-plus" action="#{saleController.createSale()}"/>
+                    </h:panelGrid>
+                </h:form>
+
+                <h:form  id="form">
+                    <p:dataTable value="#{saleController.getAllSale()}" var="Sale" style="margin: 2em;" rowKey="#{Sale.id}">
+
+                        <p:column headerText="Города">
+                            <h:outputText value="#{Sale.name}"/>
+                        </p:column>
+                        <p:column headerText="Города">
+                            <h:outputText value="#{Sale.quantity}"/>
+                        </p:column>
+                        <p:column headerText="Города">
+                            <h:outputText value="#{Sale.theAmount}"/>
+                        </p:column>
+                        <p:column headerText="Города">
+                            <h:outputText value="#{Sale.typeOfService}"/>
+                        </p:column>
+                        <p:column headerText="Города">
+                            <h:outputText value="#{Sale.appraiser}"/>
+                        </p:column>
+                        <p:column headerText="Города">
+                            <h:outputText value="#{Sale.estimation}"/>
+                        </p:column>
+                        <p:column headerText="Города">
+                            <h:outputText value="#{Sale.client}"/>
+                        </p:column>
+
+                        <p:column headerText="Кнопки" style="width:100px;text-align: center">
+                            <p:commandButton value="" icon="fa fa-fw fa-pencil" update=":form:SaleEdit" oncomplete="PF('editDialog').show()">
+                                <f:setPropertyActionListener value="#{Sale}" target="#{saleController.selectedSale}"/>
+                            </p:commandButton>
+
+                            <p:commandButton  value="" icon="fa fa-fw fa-trash" action="#{saleController.deleteSale(Sale)}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dialog header="Sale" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="SaleEdit" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty saleController.selectedSale}" columnClasses="label,value">
+
+                                <h:outputText value="Название " />
+                                <p:inputText value="#{saleController.selectedSale.name}" />
+                                <h:outputText value="Кол-во " />
+                                <p:inputText value="#{saleController.selectedSale.quantity}" />
+                                <h:outputText value="Сумма " />
+                                <p:inputText value="#{saleController.selectedSale.theAmount}" />
+                                <h:outputText value="Сервис " />
+                                <p:inputText value="#{saleController.selectedSale.typeOfService}" />
+                                <h:outputText value="Оценщик " />
+                                <p:inputText value="#{saleController.selectedSale.appraiser}" />
+                                <h:outputText value="Оценка " />
+                                <p:inputText value="#{saleController.selectedSale.estimation}" />
+                                <h:outputText value="Клиент " />
+                                <p:inputText value="#{saleController.selectedSale.client}" />
+
+
+                            </p:panelGrid>
+
+                            <p:commandButton value=" " icon="fa fa-fw fa-pencil" action="#{saleController.UpdateSale(saleController.selectedSale)}"/>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
