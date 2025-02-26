@@ -58,8 +58,9 @@ public class Client implements Serializable {
     private String surName;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 11)
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private String phoneNumber;
 
     public Client() {
     }
@@ -68,7 +69,7 @@ public class Client implements Serializable {
         this.id = id;
     }
 
-    public Client(Integer id, String lastName, String firstName, String surName, int phoneNumber) {
+    public Client(Integer id, String lastName, String firstName, String surName, String phoneNumber) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -108,11 +109,11 @@ public class Client implements Serializable {
         this.surName = surName;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

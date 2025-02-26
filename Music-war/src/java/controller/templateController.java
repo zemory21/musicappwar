@@ -29,4 +29,12 @@ public class templateController {
         return "Sale.xhtml?faces-redirect=true";
     }
     
+    public String Buyers(){
+        return "Buyers.xhtml?faces-redirect=true";
+    }
+    
+    public String Client(){
+        return "Client.xhtml?faces-redirect=true";
+    }
+    
 }

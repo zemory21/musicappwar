@@ -16,14 +16,14 @@
                     <h:panelGrid columns="2" cellpadding="5">
                         <h:outputText value="Название " />
                         <p:inputText value="#{saleController.name}"/>
-                        
+
                         <h:outputText value="Кол-во " />
                         <p:inputText value="#{saleController.quantity}"/>
-                        
+
                         <h:outputText value="Сумма " />
                         <p:inputText value="#{saleController.theAmount}"/>
-                        
-                        <h:outputText value="Оценщик " />
+
+                        <h:outputText value="Оценщик" />
                         <p:inputText value="#{saleController.appraiser}"/>
                         
                         <h:outputText value="Оценка " />
@@ -47,9 +47,6 @@
                         </p:column>
                         <p:column headerText="Города">
                             <h:outputText value="#{Sale.theAmount}"/>
-                        </p:column>
-                        <p:column headerText="Города">
-                            <h:outputText value="#{Sale.typeOfService}"/>
                         </p:column>
                         <p:column headerText="Города">
                             <h:outputText value="#{Sale.appraiser}"/>
@@ -80,8 +77,6 @@
                                 <p:inputText value="#{saleController.selectedSale.quantity}" />
                                 <h:outputText value="Сумма " />
                                 <p:inputText value="#{saleController.selectedSale.theAmount}" />
-                                <h:outputText value="Сервис " />
-                                <p:inputText value="#{saleController.selectedSale.typeOfService}" />
                                 <h:outputText value="Оценщик " />
                                 <p:inputText value="#{saleController.selectedSale.appraiser}" />
                                 <h:outputText value="Оценка " />

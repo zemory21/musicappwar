@@ -9,11 +9,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Sale.findByName", query = "SELECT s FROM Sale s WHERE s.name = :name")
     , @NamedQuery(name = "Sale.findByQuantity", query = "SELECT s FROM Sale s WHERE s.quantity = :quantity")
     , @NamedQuery(name = "Sale.findByTheAmount", query = "SELECT s FROM Sale s WHERE s.theAmount = :theAmount")
-    , @NamedQuery(name = "Sale.findByTypeOfService", query = "SELECT s FROM Sale s WHERE s.typeOfService = :typeOfService")
     , @NamedQuery(name = "Sale.findByAppraiser", query = "SELECT s FROM Sale s WHERE s.appraiser = :appraiser")
     , @NamedQuery(name = "Sale.findByEstimation", query = "SELECT s FROM Sale s WHERE s.estimation = :estimation")
     , @NamedQuery(name = "Sale.findByClient", query = "SELECT s FROM Sale s WHERE s.client = :client")})
@@ -37,12 +39,13 @@ public class Sale implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
@@ -55,18 +58,17 @@ public class Sale implements Serializable {
     private int theAmount;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "type_of_service")
-    private String typeOfService;
-    @Basic(optional = false)
-    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "appraiser")
     private String appraiser;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "estimation")
     private String estimation;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "client")
     private String client;
 
@@ -77,12 +79,11 @@ public class Sale implements Serializable {
         this.id = id;
     }
 
-    public Sale(Integer id, String name, int quantity, int theAmount, String typeOfService, String appraiser, String estimation, String client) {
+    public Sale(Integer id, String name, int quantity, int theAmount, String appraiser, String estimation, String client) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.theAmount = theAmount;
-        this.typeOfService = typeOfService;
         this.appraiser = appraiser;
         this.estimation = estimation;
         this.client = client;
@@ -118,14 +119,6 @@ public class Sale implements Serializable {
 
     public void setTheAmount(int theAmount) {
         this.theAmount = theAmount;
-    }
-
-    public String getTypeOfService() {
-        return typeOfService;
-    }
-
-    public void setTypeOfService(String typeOfService) {
-        this.typeOfService = typeOfService;
     }
 
     public String getAppraiser() {

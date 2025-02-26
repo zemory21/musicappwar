@@ -5,6 +5,7 @@
  */
 package controller;
 
+import entities.Appraiser;
 import entities.Cities;
 import entities.Sale;
 import javax.inject.Named;
@@ -12,6 +13,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import sessionbean.AppraiserFacadeLocal;
 import sessionbean.SaleFacadeLocal;
 
 /**
@@ -114,7 +116,7 @@ public class saleController implements Serializable {
         this.sale.setAppraiser(this.appraiser);
         this.sale.setEstimation(this.estimation);
         this.sale.setClient(this.client);
-        this.saleFacade.create(this.sale);
+        this.saleFacade.create(sale);
         emptyVariables();
         return "Sale.xhtml?faces-redirect=true";
     }

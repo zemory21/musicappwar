@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Фамилия " />
+                        <p:inputText value="#{clientController.lastName}"/>
+                        
+                        <h:outputText value="Имя " />
+                        <p:inputText value="#{clientController.firstName}"/>
+                        
+                        <h:outputText value="Отчество " />
+                        <p:inputText value="#{clientController.surName}"/>
+                        
+                        <h:outputText value="Номер телефона " />
+                        <p:inputText value="#{clientController.phoneNumber}"/>
+
+                        <p:commandButton value="Добавить" icon="fa fa-fw fa-plus" action="#{clientController.createClient()}"/>
+                    </h:panelGrid>
+                </h:form>
+
+                <h:form  id="form">
+                    <p:dataTable value="#{clientController.getAllClient()}" var="Client" style="margin: 2em;" rowKey="#{Client.id}">
+
+                        <p:column headerText="Фамилия">
+                            <h:outputText value="#{Client.lastName}"/>
+                        </p:column>
+                        <p:column headerText="Имя">
+                            <h:outputText value="#{Client.firstName}"/>
+                        </p:column>
+                        <p:column headerText="Отчество">
+                            <h:outputText value="#{Client.surName}"/>
+                        </p:column>
+                        <p:column headerText="Номер телефона">
+                            <h:outputText value="#{Client.phoneNumber}"/>
+                        </p:column>
+
+                        <p:column headerText="Кнопки" style="width:100px;text-align: center">
+                            <p:commandButton value="" icon="fa fa-fw fa-pencil" update=":form:ClientEdit" oncomplete="PF('editDialog').show()">
+                                <f:setPropertyActionListener value="#{Client}" target="#{clientController.selectedClient}"/>
+                            </p:commandButton>
+
+                            <p:commandButton  value="" icon="fa fa-fw fa-trash" action="#{clientController.deleteClient(Client)}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dialog header="Client" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="ClientEdit" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty clientController.selectedClient}" columnClasses="label,value">
+
+                                <h:outputText value="Фамилия " />
+                                <p:inputText value="#{clientController.selectedClient.lastName}" />
+                                <h:outputText value="Имя " />
+                                <p:inputText value="#{clientController.selectedClient.firstName}" />
+                                <h:outputText value="Отчество " />
+                                <p:inputText value="#{clientController.selectedClient.surName}" />
+                                <h:outputText value="Номер телефона " />
+                                <p:inputText value="#{clientController.selectedClient.phoneNumber}" />
+
+                            </p:panelGrid>
+
+                            <p:commandButton value=" " icon="fa fa-fw fa-pencil" action="#{clientController.updateClient(clientController.selectedClient)}"/>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
