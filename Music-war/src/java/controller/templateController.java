@@ -41,4 +41,8 @@ public class templateController {
         return "ReceiptOfGoods.xhtml?faces-redirect=true";
     }
     
+    public String Registration(){
+        return "Registration.xhtml?faces-redirect=true";
+    }
+    
 }

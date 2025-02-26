@@ -39,22 +39,22 @@
                 <h:form  id="form">
                     <p:dataTable value="#{saleController.getAllSale()}" var="Sale" style="margin: 2em;" rowKey="#{Sale.id}">
 
-                        <p:column headerText="Города">
+                        <p:column headerText="Название">
                             <h:outputText value="#{Sale.name}"/>
                         </p:column>
-                        <p:column headerText="Города">
+                        <p:column headerText="Кол-во">
                             <h:outputText value="#{Sale.quantity}"/>
                         </p:column>
-                        <p:column headerText="Города">
+                        <p:column headerText="Сумма">
                             <h:outputText value="#{Sale.theAmount}"/>
                         </p:column>
-                        <p:column headerText="Города">
+                        <p:column headerText="Оценщик">
                             <h:outputText value="#{Sale.appraiser}"/>
                         </p:column>
-                        <p:column headerText="Города">
+                        <p:column headerText="Оценка">
                             <h:outputText value="#{Sale.estimation}"/>
                         </p:column>
-                        <p:column headerText="Города">
+                        <p:column headerText="Клиент">
                             <h:outputText value="#{Sale.client}"/>
                         </p:column>
 

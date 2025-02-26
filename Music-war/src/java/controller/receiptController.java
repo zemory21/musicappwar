@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 import sessionbean.ReceiptFacadeLocal;
 
 /**
@@ -20,12 +21,13 @@ import sessionbean.ReceiptFacadeLocal;
 @SessionScoped
 public class receiptController implements Serializable {
 
+    @EJB
     private ReceiptFacadeLocal receiptFacade;
 
     private Receipt selectedReceipt;
 
     private Receipt receipt = new Receipt();
-    private String productName;
+    private String nameProduct;
     private String typeOfTool;
     private String dateOfReceipt;
     private int documentNumber;
@@ -44,12 +46,12 @@ public class receiptController implements Serializable {
         this.selectedReceipt = selectedReceipt;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
     public String getTypeOfTool() {
@@ -100,15 +102,8 @@ public class receiptController implements Serializable {
         this.theAmount = theAmount;
     }
 
-    public List<Receipt> getAllReceipt() {
-        if (receiptFacade != null) {
-            return this.receiptFacade.findAll();
-        }
-        return null;
-    }
-
     public void emptyVariables() {
-        this.productName = "";
+        this.nameProduct = "";
         this.typeOfTool = "";
         this.dateOfReceipt = "";
         this.documentNumber = 0;
@@ -117,15 +112,19 @@ public class receiptController implements Serializable {
         this.theAmount = 0;
     }
 
+    public List<Receipt> getAllReceipt() {
+        return this.receiptFacade.findAll();
+    }
+
     public String createReceipt() {
-        this.receipt.setProductName(this.productName);
+        this.receipt.setProductName(this.nameProduct);
         this.receipt.setTypeOfTool(this.typeOfTool);
         this.receipt.setDateOfReceipt(this.dateOfReceipt);
         this.receipt.setDocumentNumber(this.documentNumber);
         this.receipt.setProvider(this.provider);
         this.receipt.setQuantity(this.quantity);
         this.receipt.setTheAmount(this.theAmount);
-        this.receiptFacade.create(receipt);
+        this.receiptFacade.create(this.receipt);
         emptyVariables();
         return "ReceiptOfGoods.xhtml?faces-redirect=true";
     }

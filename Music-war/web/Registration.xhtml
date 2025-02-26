@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Фамилия " />
+                        <p:inputText value="#{regController.lastName}"/>
+
+                        <h:outputText value="Имя " />
+                        <p:inputText value="#{regController.firstName}"/>
+
+                        <h:outputText value="Отчество " />
+                        <p:inputText value="#{regController.surName}"/>
+
+                        <h:outputText value="Адрес" />
+                        <p:inputText value="#{regController.adress}"/>
+
+                        <h:outputText value="Пароль" />
+                        <p:inputText value="#{regController.password}"/>
+
+                        <h:outputText value="Почта " />
+                        <p:inputText value="#{regController.email}"/>
+
+                        <p:commandButton value="Добавить" icon="fa fa-fw fa-plus" action="#{regController.createUsers()}"/>
+                    </h:panelGrid>
+                </h:form>
+
+                <h:form  id="form">
+                    <p:dataTable value="#{regController.getAllUsers()}" var="Users" style="margin: 2em;" rowKey="#{Users.id}">
+
+                        <p:column headerText="Фамилия">
+                            <h:outputText value="#{Users.lastName}"/>
+                        </p:column>
+                        <p:column headerText="Имя">
+                            <h:outputText value="#{Users.firstName}"/>
+                        </p:column>
+                        <p:column headerText="Отчество">
+                            <h:outputText value="#{Users.surName}"/>
+                        </p:column>
+                        <p:column headerText="Адрес">
+                            <h:outputText value="#{Users.adress}"/>
+                        </p:column>
+                        <p:column headerText="Пароль">
+                            <h:outputText value="#{Users.password}"/>
+                        </p:column>
+                        <p:column headerText="Почта">
+                            <h:outputText value="#{Users.email}"/>
+                        </p:column>
+
+                        <p:column headerText="Кнопки" style="width:100px;text-align: center">
+                            <p:commandButton value="" icon="fa fa-fw fa-pencil" update=":form:UserEdit" oncomplete="PF('editDialog').show()">
+                                <f:setPropertyActionListener value="#{Users}" target="#{regController.selectedUsers}"/>
+                            </p:commandButton>
+
+                            <p:commandButton  value="" icon="fa fa-fw fa-trash" action="#{regController.deleteUser(Users)}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dialog header="Users" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="UserEdit" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty regController.selectedUsers}" columnClasses="label,value">
+
+                                <h:outputText value="Фамилия " />
+                                <p:inputText value="#{regController.selectedUsers.lastName}" />
+                                <h:outputText value="Имя " />
+                                <p:inputText value="#{regController.selectedUsers.firstName}" />
+                                <h:outputText value="Отчество " />
+                                <p:inputText value="#{regController.selectedUsers.surName}" />
+                                <h:outputText value="Адрес " />
+                                <p:inputText value="#{regController.selectedUsers.adress}" />
+                                <h:outputText value="Пароль " />
+                                <p:inputText value="#{regController.selectedUsers.password}" />
+                                <h:outputText value="Почта " />
+                                <p:inputText value="#{regController.selectedUsers.email}" />
+
+                            </p:panelGrid>
+
+                            <p:commandButton value=" " icon="fa fa-fw fa-pencil" action="#{regController.updateUser(regController.selectedUsers)}"/>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
