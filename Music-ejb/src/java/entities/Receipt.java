@@ -6,7 +6,6 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,19 +24,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author zemor
  */
 @Entity
-@Table(name = "receipt_of_goods")
+@Table(name = "receipt")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ReceiptOfGoods.findAll", query = "SELECT r FROM ReceiptOfGoods r")
-    , @NamedQuery(name = "ReceiptOfGoods.findById", query = "SELECT r FROM ReceiptOfGoods r WHERE r.id = :id")
-    , @NamedQuery(name = "ReceiptOfGoods.findByProductName", query = "SELECT r FROM ReceiptOfGoods r WHERE r.productName = :productName")
-    , @NamedQuery(name = "ReceiptOfGoods.findByTypeOfTool", query = "SELECT r FROM ReceiptOfGoods r WHERE r.typeOfTool = :typeOfTool")
-    , @NamedQuery(name = "ReceiptOfGoods.findByDateOfReceipt", query = "SELECT r FROM ReceiptOfGoods r WHERE r.dateOfReceipt = :dateOfReceipt")
-    , @NamedQuery(name = "ReceiptOfGoods.findByDocumentNumber", query = "SELECT r FROM ReceiptOfGoods r WHERE r.documentNumber = :documentNumber")
-    , @NamedQuery(name = "ReceiptOfGoods.findByProvider", query = "SELECT r FROM ReceiptOfGoods r WHERE r.provider = :provider")
-    , @NamedQuery(name = "ReceiptOfGoods.findByQuantity", query = "SELECT r FROM ReceiptOfGoods r WHERE r.quantity = :quantity")
-    , @NamedQuery(name = "ReceiptOfGoods.findByTheAmount", query = "SELECT r FROM ReceiptOfGoods r WHERE r.theAmount = :theAmount")})
-public class ReceiptOfGoods implements Serializable {
+    @NamedQuery(name = "Receipt.findAll", query = "SELECT r FROM Receipt r")
+    , @NamedQuery(name = "Receipt.findById", query = "SELECT r FROM Receipt r WHERE r.id = :id")
+    , @NamedQuery(name = "Receipt.findByProductName", query = "SELECT r FROM Receipt r WHERE r.productName = :productName")
+    , @NamedQuery(name = "Receipt.findByTypeOfTool", query = "SELECT r FROM Receipt r WHERE r.typeOfTool = :typeOfTool")
+    , @NamedQuery(name = "Receipt.findByDateOfReceipt", query = "SELECT r FROM Receipt r WHERE r.dateOfReceipt = :dateOfReceipt")
+    , @NamedQuery(name = "Receipt.findByDocumentNumber", query = "SELECT r FROM Receipt r WHERE r.documentNumber = :documentNumber")
+    , @NamedQuery(name = "Receipt.findByProvider", query = "SELECT r FROM Receipt r WHERE r.provider = :provider")
+    , @NamedQuery(name = "Receipt.findByQuantity", query = "SELECT r FROM Receipt r WHERE r.quantity = :quantity")
+    , @NamedQuery(name = "Receipt.findByTheAmount", query = "SELECT r FROM Receipt r WHERE r.theAmount = :theAmount")})
+public class Receipt implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,21 +51,23 @@ public class ReceiptOfGoods implements Serializable {
     private String productName;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "type_of_tool")
-    private int typeOfTool;
+    private String typeOfTool;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "date_of_receipt")
-    @Temporal(TemporalType.DATE)
-    private Date dateOfReceipt;
+    private String dateOfReceipt;
     @Basic(optional = false)
     @NotNull
     @Column(name = "document_number")
     private int documentNumber;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "provider")
-    private int provider;
+    private String provider;
     @Basic(optional = false)
     @NotNull
     @Column(name = "quantity")
@@ -78,14 +77,14 @@ public class ReceiptOfGoods implements Serializable {
     @Column(name = "the_amount")
     private int theAmount;
 
-    public ReceiptOfGoods() {
+    public Receipt() {
     }
 
-    public ReceiptOfGoods(Integer id) {
+    public Receipt(Integer id) {
         this.id = id;
     }
 
-    public ReceiptOfGoods(Integer id, String productName, int typeOfTool, Date dateOfReceipt, int documentNumber, int provider, int quantity, int theAmount) {
+    public Receipt(Integer id, String productName, String typeOfTool, String dateOfReceipt, int documentNumber, String provider, int quantity, int theAmount) {
         this.id = id;
         this.productName = productName;
         this.typeOfTool = typeOfTool;
@@ -112,19 +111,19 @@ public class ReceiptOfGoods implements Serializable {
         this.productName = productName;
     }
 
-    public int getTypeOfTool() {
+    public String getTypeOfTool() {
         return typeOfTool;
     }
 
-    public void setTypeOfTool(int typeOfTool) {
+    public void setTypeOfTool(String typeOfTool) {
         this.typeOfTool = typeOfTool;
     }
 
-    public Date getDateOfReceipt() {
+    public String getDateOfReceipt() {
         return dateOfReceipt;
     }
 
-    public void setDateOfReceipt(Date dateOfReceipt) {
+    public void setDateOfReceipt(String dateOfReceipt) {
         this.dateOfReceipt = dateOfReceipt;
     }
 
@@ -136,11 +135,11 @@ public class ReceiptOfGoods implements Serializable {
         this.documentNumber = documentNumber;
     }
 
-    public int getProvider() {
+    public String getProvider() {
         return provider;
     }
 
-    public void setProvider(int provider) {
+    public void setProvider(String provider) {
         this.provider = provider;
     }
 
@@ -170,10 +169,10 @@ public class ReceiptOfGoods implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ReceiptOfGoods)) {
+        if (!(object instanceof Receipt)) {
             return false;
         }
-        ReceiptOfGoods other = (ReceiptOfGoods) object;
+        Receipt other = (Receipt) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -182,7 +181,7 @@ public class ReceiptOfGoods implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.ReceiptOfGoods[ id=" + id + " ]";
+        return "entities.Receipt[ id=" + id + " ]";
     }
     
 }

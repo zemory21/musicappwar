@@ -5,7 +5,7 @@
  */
 package sessionbean;
 
-import entities.TypeOfService;
+import entities.Receipt;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,19 +14,19 @@ import javax.ejb.Local;
  * @author zemor
  */
 @Local
-public interface TypeOfServiceFacadeLocal {
+public interface ReceiptFacadeLocal {
 
-    void create(TypeOfService typeOfService);
+    void create(Receipt receipt);
 
-    void edit(TypeOfService typeOfService);
+    void edit(Receipt receipt);
 
-    void remove(TypeOfService typeOfService);
+    void remove(Receipt receipt);
 
-    TypeOfService find(Object id);
+    Receipt find(Object id);
 
-    List<TypeOfService> findAll();
+    List<Receipt> findAll();
 
-    List<TypeOfService> findRange(int[] range);
+    List<Receipt> findRange(int[] range);
 
     int count();
     

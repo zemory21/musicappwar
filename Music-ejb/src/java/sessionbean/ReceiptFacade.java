@@ -5,7 +5,7 @@
  */
 package sessionbean;
 
-import entities.TypeOfService;
+import entities.Receipt;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author zemor
  */
 @Stateless
-public class TypeOfServiceFacade extends AbstractFacade<TypeOfService> implements TypeOfServiceFacadeLocal {
+public class ReceiptFacade extends AbstractFacade<Receipt> implements ReceiptFacadeLocal {
 
     @PersistenceContext(unitName = "Music-ejbPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class TypeOfServiceFacade extends AbstractFacade<TypeOfService> implement
         return em;
     }
 
-    public TypeOfServiceFacade() {
-        super(TypeOfService.class);
+    public ReceiptFacade() {
+        super(Receipt.class);
     }
     
 }
