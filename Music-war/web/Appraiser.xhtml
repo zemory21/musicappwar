@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Фамилия " />
+                        <p:inputText value="#{appraiserController.lastName}"/>
+                        
+                        <h:outputText value="Имя " />
+                        <p:inputText value="#{appraiserController.firstName}"/>
+                        
+                        <h:outputText value="Отчество " />
+                        <p:inputText value="#{appraiserController.surName}"/>
+                        
+                        <h:outputText value="Паспортные дынне " />
+                        <p:inputText value="#{appraiserController.passportData}"/>
+
+                        <p:commandButton value="Добавить" icon="fa fa-fw fa-plus" action="#{appraiserController.createAppraiser()}"/>
+                    </h:panelGrid>
+                </h:form>
+
+                <h:form  id="form">
+                    <p:dataTable value="#{appraiserController.getAllAppraiser()}" var="Appraiser" style="margin: 2em;" rowKey="#{Appraiser.id}">
+
+                        <p:column headerText="Фамилия">
+                            <h:outputText value="#{Appraiser.lastName}"/>
+                        </p:column>
+                        <p:column headerText="Имя">
+                            <h:outputText value="#{Appraiser.firstName}"/>
+                        </p:column>
+                        <p:column headerText="Отчество">
+                            <h:outputText value="#{Appraiser.surName}"/>
+                        </p:column>
+                        <p:column headerText="Пасспортные данные">
+                            <h:outputText value="#{Appraiser.passportData}"/>
+                        </p:column>
+
+                        <p:column headerText="Кнопки" style="width:100px;text-align: center">
+                            <p:commandButton value="" icon="fa fa-fw fa-pencil" update=":form:AppraiserEdit" oncomplete="PF('editDialog').show()">
+                                <f:setPropertyActionListener value="#{Appraiser}" target="#{appraiserController.selectedAppraiser}"/>
+                            </p:commandButton>
+
+                            <p:commandButton  value="" icon="fa fa-fw fa-trash" action="#{appraiserController.deleteAppraiser(Appraiser)}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dialog header="Appraiser" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="AppraiserEdit" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty appraiserController.selectedAppraiser}" columnClasses="label,value">
+
+                                <h:outputText value="Фамилия " />
+                                <p:inputText value="#{appraiserController.selectedAppraiser.lastName}" />
+                                <h:outputText value="Имя " />
+                                <p:inputText value="#{appraiserController.selectedAppraiser.firstName}" />
+                                <h:outputText value="Отчество " />
+                                <p:inputText value="#{appraiserController.selectedAppraiser.surName}" />
+                                <h:outputText value="Паспортные данные " />
+                                <p:inputText value="#{appraiserController.selectedAppraiser.passportData}" />
+
+                            </p:panelGrid>
+
+                            <p:commandButton value=" " icon="fa fa-fw fa-pencil" action="#{appraiserController.updateAppraiser(appraiserController.selectedAppraiser)}"/>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
