@@ -45,4 +45,8 @@ public class templateController {
         return "Registration.xhtml?faces-redirect=true";
     }
     
+    public String Index(){
+        return "index.xhtml?faces-redirect=true";
+    }
+    
 }
