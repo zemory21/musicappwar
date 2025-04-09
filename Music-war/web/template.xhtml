@@ -17,16 +17,19 @@
 
         <div id="top" class="top">
             <ui:insert name="top">
-                <p:commandLink action="#{templateController.Index}">
-                    <img class="logo" src="resources/Bass Players.png" alt=""/>
-                </p:commandLink>
+                <div class="header">
+                    <p:commandLink action="#{templateController.Index}">
+                        <img class="logo" src="resources/Bass Players.png" alt=""/>
+                    </p:commandLink>
+                    <h1 class="site-title">Музыкальная Лавка</h1>
+                </div>
             </ui:insert>
         </div>
         <div>
             <div id="left">
                 <ui:insert name="left">
-                    <p><p:commandLink value="Оценщики" action="#{templateController.Appraiser()}"/></p>
-                    <p><p:commandLink value="Города" action="#{templateController.City()}"/></p>
+                    <p><p:commandLink value="Оценщики" action="#{templateController.Appraiser}"/></p>
+                    <p><p:commandLink value="Города" action="#{templateController.City}"/></p>
                     <p><p:commandLink value="Продажа" action="#{templateController.Sale()}"/></p>
                     <p><p:commandLink value="Покупатели" action="#{templateController.Buyers}"/></p>
                     <p><p:commandLink value="Клиенты" action="#{templateController.Client}"/></p>

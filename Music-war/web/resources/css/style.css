@@ -1,4 +1,31 @@
 .logo{
-    width: 80px;
-    height: 80px;
+    max-width: 100px; /* Ограничиваем максимальную ширину логотипа */
+    height: auto; /* Сохраняем пропорции логотипа */
+}
+
+.container{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.foto{
+    max-width: 580px;
+    height: auto;
+}
+
+
+.header{
+    display: flex; /* Используем flexbox для размещения элементов в строку */
+    align-items: center; /* Выравниваем элементы по центру по вертикали */
+    justify-content: space-between; /* Размещаем элементы с равными отступами между ними */
+    padding: 10px; /* Добавляем отступы вокруг заголовка */
+}
+
+.site-title{
+    flex-grow: 1; /* Позволяем заголовку занимать оставшееся пространство */
+    text-align: center; /* Центрируем текст заголовка */
+    font-size: 24px; /* Устанавливаем размер шрифта для названия сайта */
+    margin: 0; /* Убираем отступы по умолчанию у заголовка */
+    color: black;
 }
