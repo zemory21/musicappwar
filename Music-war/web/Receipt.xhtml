@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h2>Поступление товара</h2>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Название продукта " />
+                        <p:inputText value="#{receiptController.nameProduct}"/>
+
+                        <h:outputText value="Тип продукта " />
+                        <p:inputText value="#{receiptController.typeOfTool}"/>
+
+                        <h:outputText value="Дата поступления " />
+                        <p:inputText value="#{receiptController.dateOfReceipt}"/>
+
+                        <h:outputText value="Номер документа" />
+                        <p:inputText value="#{receiptController.documentNumber}"/>
+
+                        <h:outputText value="Поставщик" />
+                        <p:inputText value="#{receiptController.provider}"/>
+
+                        <h:outputText value="Кол-во " />
+                        <p:inputText value="#{receiptController.quantity}"/>
+                        
+                        <h:outputText value="Стоимость " />
+                        <p:inputText value="#{receiptController.theAmount}"/>
+
+                        <p:commandButton value="Добавить" icon="fa fa-fw fa-plus" action="#{receiptController.createReceipt()}"/>
+                    </h:panelGrid>
+                </h:form>
+
+                <h:form  id="form">
+                    <p:dataTable value="#{receiptController.getAllReceipt()}" var="Receipt" style="margin: 2em;" rowKey="#{Receipt.id}">
+
+                        <p:column headerText="Название продукта ">
+                            <h:outputText value="#{Receipt.productName}"/>
+                        </p:column>
+                        <p:column headerText="Тип продукта ">
+                            <h:outputText value="#{Receipt.typeOfTool}"/>
+                        </p:column>
+                        <p:column headerText="Дата поступления ">
+                            <h:outputText value="#{Receipt.dateOfReceipt}"/>
+                        </p:column>
+                        <p:column headerText="Номер документа ">
+                            <h:outputText value="#{Receipt.documentNumber}"/>
+                        </p:column>
+                        <p:column headerText="Поставщик ">
+                            <h:outputText value="#{Receipt.provider}"/>
+                        </p:column>
+                        <p:column headerText="Кол-во ">
+                            <h:outputText value="#{Receipt.quantity}"/>
+                        </p:column>
+                        <p:column headerText="Стоимость ">
+                            <h:outputText value="#{Receipt.theAmount}"/>
+                        </p:column>
+
+                        <p:column headerText="Кнопки" style="width:100px;text-align: center">
+                            <p:commandButton value="" icon="fa fa-fw fa-pencil" update=":form:UserEdit" oncomplete="PF('editDialog').show()">
+                                <f:setPropertyActionListener value="#{Receipt}" target="#{receiptController.selectedReceipt}"/>
+                            </p:commandButton>
+
+                            <p:commandButton  value="" icon="fa fa-fw fa-trash" action="#{receiptController.deleteReceipt(Receipt)}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dialog header="Users" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="UserEdit" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty receiptController.selectedReceipt}" columnClasses="label,value">
+
+                                <h:outputText value="Название продукта " />
+                                <p:inputText value="#{receiptController.selectedReceipt.productName}" />
+                                <h:outputText value="Тип продукта " />
+                                <p:inputText value="#{receiptController.selectedReceipt.typeOfTool}" />
+                                <h:outputText value="Дата поступления " />
+                                <p:inputText value="#{receiptController.selectedReceipt.dateOfReceipt}" />
+                                <h:outputText value="Номер документа " />
+                                <p:inputText value="#{receiptController.selectedReceipt.documentNumber}" />
+                                <h:outputText value="Поставщик " />
+                                <p:inputText value="#{receiptController.selectedReceipt.provider}" />
+                                <h:outputText value="Кол-во " />
+                                <p:inputText value="#{receiptController.selectedReceipt.quantity}" />
+                                <h:outputText value="Стоимость " />
+                                <p:inputText value="#{receiptController.selectedReceipt.theAmount}" />
+
+                            </p:panelGrid>
+
+                            <p:commandButton value=" " icon="fa fa-fw fa-pencil" action="#{receiptController.updateReceipt(receiptController.selectedReceipt)}"/>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

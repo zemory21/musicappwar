@@ -38,7 +38,7 @@ public class templateController {
     }
     
     public String Receipt(){
-        return "ReceiptOfGoods.xhtml?faces-redirect=true";
+        return "Receipt.xhtml?faces-redirect=true";
     }
     
     public String Registration(){

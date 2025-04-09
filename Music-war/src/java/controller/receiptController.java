@@ -126,17 +126,17 @@ public class receiptController implements Serializable {
         this.receipt.setTheAmount(this.theAmount);
         this.receiptFacade.create(this.receipt);
         emptyVariables();
-        return "ReceiptOfGoods.xhtml?faces-redirect=true";
+        return "Receipt.xhtml?faces-redirect=true";
     }
 
     public String updateReceipt(Receipt receipt) {
         this.receiptFacade.edit(receipt);
-        return "ReceiptOfGoods.xhtml?faces-redirect=true";
+        return "Receipt.xhtml?faces-redirect=true";
     }
 
     public String deleteReceipt(Receipt receipt) {
         this.receiptFacade.remove(receipt);
-        return "ReceiptOfGoods.xhtml?faces-redirect=true";
+        return "Receipt.xhtml?faces-redirect=true";
     }
 
 }
